@@ -46,14 +46,14 @@ class BindingToSyntax<T> implements interfaces.BindingToSyntax<T> {
     return new BindingInWhenOnSyntax<T>(this._binding);
   }
 
-  public toConstructor<T2>(constructor: interfaces.Newable<T2>): interfaces.BindingWhenOnSyntax<T> {
+  public toConstructor<T2 extends T>(constructor: interfaces.Newable<T2>): interfaces.BindingWhenOnSyntax<T> {
     this._binding.type = BindingTypeEnum.Constructor;
     this._binding.implementationType = constructor as unknown as T;
     this._binding.scope = BindingScopeEnum.Singleton;
     return new BindingWhenOnSyntax<T>(this._binding);
   }
 
-  public toFactory<T2>(factory: interfaces.FactoryCreator<T2>): interfaces.BindingWhenOnSyntax<T> {
+  public toFactory<T2 extends T>(factory: interfaces.FactoryCreator<T2>): interfaces.BindingWhenOnSyntax<T> {
     this._binding.type = BindingTypeEnum.Factory;
     this._binding.factory = factory;
     this._binding.scope = BindingScopeEnum.Singleton;
@@ -69,7 +69,7 @@ class BindingToSyntax<T> implements interfaces.BindingToSyntax<T> {
     return bindingWhenOnSyntax;
   }
 
-  public toAutoFactory<T2>(serviceIdentifier: interfaces.ServiceIdentifier<T2>): interfaces.BindingWhenOnSyntax<T> {
+  public toAutoFactory<T2 extends T>(serviceIdentifier: interfaces.ServiceIdentifier<T2>): interfaces.BindingWhenOnSyntax<T> {
     this._binding.type = BindingTypeEnum.Factory;
     this._binding.factory = (context) => {
       const autofactory = () => context.container.get<T2>(serviceIdentifier);
@@ -79,7 +79,7 @@ class BindingToSyntax<T> implements interfaces.BindingToSyntax<T> {
     return new BindingWhenOnSyntax<T>(this._binding);
   }
 
-  public toAutoNamedFactory<T2>(serviceIdentifier: interfaces.ServiceIdentifier<T2>): BindingWhenOnSyntax<T> {
+  public toAutoNamedFactory<T2 extends T>(serviceIdentifier: interfaces.ServiceIdentifier<T2>): BindingWhenOnSyntax<T> {
     this._binding.type = BindingTypeEnum.Factory;
     this._binding.factory = (context) => {
       return (named: unknown) => context.container.getNamed<T2>(serviceIdentifier, named as string);
@@ -87,7 +87,7 @@ class BindingToSyntax<T> implements interfaces.BindingToSyntax<T> {
     return new BindingWhenOnSyntax<T>(this._binding);
   }
 
-  public toProvider<T2>(provider: interfaces.ProviderCreator<T2>): interfaces.BindingWhenOnSyntax<T> {
+  public toProvider<T2 extends T>(provider: interfaces.ProviderCreator<T2>): interfaces.BindingWhenOnSyntax<T> {
     this._binding.type = BindingTypeEnum.Provider;
     this._binding.provider = provider;
     this._binding.scope = BindingScopeEnum.Singleton;

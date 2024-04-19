@@ -340,13 +340,13 @@ namespace interfaces {
     toSelf(): BindingInWhenOnSyntax<T>;
     toConstantValue(value: T): BindingWhenOnSyntax<T>;
     toDynamicValue(func: DynamicValue<T>): BindingInWhenOnSyntax<T>;
-    toConstructor<T2>(constructor: Newable<T2>): BindingWhenOnSyntax<T>;
-    toFactory<T2, T3 extends unknown[] = unknown[], T4 extends unknown[] = unknown[]>(
+    toConstructor<T2 extends T>(constructor: Newable<T2>): BindingWhenOnSyntax<T>;
+    toFactory<T2 extends T, T3 extends unknown[] = unknown[], T4 extends unknown[] = unknown[]>(
       factory: FactoryCreator<T2, T3, T4>): BindingWhenOnSyntax<T>;
     toFunction(func: T): BindingWhenOnSyntax<T>;
-    toAutoFactory<T2>(serviceIdentifier: ServiceIdentifier<T2>): BindingWhenOnSyntax<T>;
-    toAutoNamedFactory<T2>(serviceIdentifier: ServiceIdentifier<T2>): BindingWhenOnSyntax<T>;
-    toProvider<T2>(provider: ProviderCreator<T2>): BindingWhenOnSyntax<T>;
+    toAutoFactory<T2 extends T>(serviceIdentifier: ServiceIdentifier<T2>): BindingWhenOnSyntax<T>;
+    toAutoNamedFactory<T2 extends T>(serviceIdentifier: ServiceIdentifier<T2>): BindingWhenOnSyntax<T>;
+    toProvider<T2 extends T>(provider: ProviderCreator<T2>): BindingWhenOnSyntax<T>;
     toService(service: ServiceIdentifier<T>): void;
   }
 
